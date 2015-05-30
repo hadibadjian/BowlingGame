@@ -10,7 +10,6 @@ module BowlingGame
       def initialize(input)
         @input = input
         @rolls = @input.split(',').map(&:to_i)
-        @score = sum
       end
 
       def number_of_rolls
@@ -29,11 +28,9 @@ module BowlingGame
         (@rolls.first == 10) && (@rolls.count == 1)
       end
 
-      private
-
-        def sum
-          @rolls.inject(:+)
-        end
+      def sum
+        @rolls.inject(:+)
+      end
 
     end
 

@@ -1,4 +1,4 @@
-require 'bowling_game/controllers/frames'
+require 'bowling_game/controllers/frames_controller'
 require 'bowling_game/scorer'
 
 module BowlingGame
@@ -10,7 +10,7 @@ module BowlingGame
     end
 
     def roll(frames)
-      @frames_controller = BowlingGame::Controllers::Frames.new frames
+      @frames_controller = BowlingGame::Controllers::FramesController.new frames
     end
 
     def score

@@ -1,13 +1,13 @@
 require 'spec_helper'
-require 'bowling_game/controllers/frames'
+require 'bowling_game/controllers/frames_controller'
 
-RSpec.describe BowlingGame::Controllers::Frames do
+RSpec.describe BowlingGame::Controllers::FramesController do
 
   context "correct frames" do
 
     before(:each) do
       @frames = "4,6 > 5,0".split('>').map(&:strip)
-      @controller = BowlingGame::Controllers::Frames.new @frames
+      @controller = BowlingGame::Controllers::FramesController.new @frames
     end
 
     it "should return correct number of frames" do

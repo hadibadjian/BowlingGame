@@ -22,10 +22,6 @@ RSpec.describe BowlingGame::Models::Frame do
       expect(@frame.valid?).to be_truthy
     end
 
-    it "should have correct score" do
-      expect(@frame.score).to eql(7)
-    end
-
   end
 
   context "spare" do
