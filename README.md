@@ -17,4 +17,4 @@ A ruby library to score bowling games.
   + If one has a strike for every roll, their score is 300
 
 ## Reference
-Scores are verified using (Bowling Score Calculator)[http://bowlinggenius.com/]
+Scores are verified using [Bowling Score Calculator](http://bowlinggenius.com/)
