@@ -17,7 +17,7 @@ module BowlingGame
       end
 
       def valid?
-        ((1..2).include? @rolls.count) && (sum < 11)
+        ((1..2).include? @rolls.count) && (rolls_sum < 11)
       end
 
       def spare?
@@ -28,7 +28,7 @@ module BowlingGame
         (@rolls.first == 10) && (@rolls.count == 1)
       end
 
-      def sum
+      def rolls_sum
         @rolls.inject(:+)
       end
 

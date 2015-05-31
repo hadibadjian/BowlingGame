@@ -6,16 +6,16 @@ module BowlingGame
 
     def calculate(frames_controller)
       @current_score = 0
-      while frame = frames_controller.next_frame
-        first_roll, second_roll = look_ahead_scores frames_controller
 
-        if frame.strike?
-          frame.score = frame.sum + first_roll.to_i + second_roll.to_i if first_roll and second_roll
-        elsif frame.spare?
-          frame.score = frame.sum + first_roll.to_i if first_roll
-        else
-          frame.score = frame.sum
-        end
+      return unless frames_controller
+
+      while frame = frames_controller.next_frame
+        first_roll, second_roll = look_ahead_rolls frames_controller
+
+        frame.score = frame_score frame, {
+            first_roll: first_roll,
+            second_roll: second_roll
+          }
 
         @current_score += frame.score if frame.score
       end
@@ -23,15 +23,30 @@ module BowlingGame
 
     private
 
-      def look_ahead_scores(frames_controller)
-        next_one_frame    = frames_controller.peek(1)
-        next_second_frame = frames_controller.peek(2)
+      def look_ahead_rolls(frames_controller)
+        one_frame_ahead = frames_controller.peek(1)
+        two_frame_ahead = frames_controller.peek(2)
 
-        look_ahead_scores = []
-        look_ahead_scores = next_one_frame.rolls unless next_one_frame.nil?
-        look_ahead_scores += next_second_frame.rolls unless next_second_frame.nil?
+        look_ahead_rolls = []
+        look_ahead_rolls = one_frame_ahead.rolls unless one_frame_ahead.nil?
+        look_ahead_rolls += two_frame_ahead.rolls unless two_frame_ahead.nil?
 
-        look_ahead_scores[0..1]
+        look_ahead_rolls[0..1]
+      end
+
+      def frame_score(frame, look_ahead_rolls = {})
+        raise 'invalid frame!' unless frame.valid?
+
+        first_roll  = look_ahead_rolls[:first_roll]
+        second_roll = look_ahead_rolls[:second_roll]
+
+        if frame.strike?
+          score = frame.rolls_sum + first_roll.to_i + second_roll.to_i if first_roll and second_roll
+        elsif frame.spare?
+          score = frame.rolls_sum + first_roll.to_i if first_roll
+        else
+          score = frame.rolls_sum
+        end
       end
 
   end
