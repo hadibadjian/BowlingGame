@@ -8,7 +8,7 @@ Feature:
     When the bowler checks the scores
     Then the score should be <score>
 
-    Examples:
+    Examples: Valid frames
     | frames                                                    | score |
     | 4,4                                                       | 8     |
     | 5,4 > 10                                                  | 9     |
@@ -18,3 +18,11 @@ Feature:
     | 10 > 5,4 > 10 > 10 > 10 > 10 > 10 > 9,0                   | 175   |
     | 10 > 5,5 > 7,1 > 10 > 10 > 10 > 6,2 > 9,1 > 10 > 9,0      | 175   |
     | 10 > 10 > 10 > 10 > 10 > 10 > 10 > 10 > 10 > 10 > 10 > 10 | 300   |
+
+    Examples: Invalid frames
+    | frames                                                         | score |
+    | 4                                                              | 0     |
+    | 10,1                                                           | 0     |
+    | 4,5,1                                                          | 0     |
+    | 11                                                             | 0     |
+    | 10 > 10 > 10 > 10 > 10 > 10 > 10 > 10 > 10 > 10 > 10 > 10 > 10 | 0     |

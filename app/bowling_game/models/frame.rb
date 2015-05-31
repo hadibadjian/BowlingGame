@@ -8,8 +8,7 @@ module BowlingGame
       attr_accessor :score
 
       def initialize(input)
-        @input = input
-        @rolls = @input.split(',').map(&:to_i)
+        @rolls = input.split(',').map(&:to_i)
       end
 
       def number_of_rolls
@@ -17,15 +16,22 @@ module BowlingGame
       end
 
       def valid?
-        ((1..2).include? @rolls.count) && (rolls_sum < 11)
+        case @rolls.count
+        when 1
+          return rolls_sum == 10
+        when 2
+          return rolls_sum < 11
+        else
+          return false
+        end
       end
 
       def spare?
-        (@rolls.inject(:+) == 10) && (@rolls.count == 2)
+        valid? && (@rolls.inject(:+) == 10)
       end
 
       def strike?
-        (@rolls.first == 10) && (@rolls.count == 1)
+        valid? && (@rolls.first == 10)
       end
 
       def rolls_sum

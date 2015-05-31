@@ -41,11 +41,11 @@ module BowlingGame
         second_roll = look_ahead_rolls[:second_roll]
 
         if frame.strike?
-          score = frame.rolls_sum + first_roll.to_i + second_roll.to_i if first_roll and second_roll
+          frame.rolls_sum + first_roll.to_i + second_roll.to_i if first_roll and second_roll
         elsif frame.spare?
-          score = frame.rolls_sum + first_roll.to_i if first_roll
+          frame.rolls_sum + first_roll.to_i if first_roll
         else
-          score = frame.rolls_sum
+          frame.rolls_sum
         end
       end
 

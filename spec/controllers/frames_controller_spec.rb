@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'bowling_game/parsers/simple_parser'
 require 'bowling_game/controllers/frames_controller'
 
 RSpec.describe BowlingGame::Controllers::FramesController do
@@ -7,7 +8,8 @@ RSpec.describe BowlingGame::Controllers::FramesController do
 
     before(:each) do
       @frames = "4,6 > 5,0".split('>').map(&:strip)
-      @controller = BowlingGame::Controllers::FramesController.new @frames
+      parser = BowlingGame::Parsers::SimpleParser.new
+      @controller = BowlingGame::Controllers::FramesController.new @frames, parser
     end
 
     it "should return correct number of frames" do

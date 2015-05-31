@@ -6,8 +6,8 @@ end
 
 When(/^the bowler checks the scores$/) do
   game = BowlingGame::Game.new
-  game.roll @frames
-  @score = game.score
+  @errors = game.roll @frames
+  @score  = game.score
 end
 
 Then(/^the score should be (\d+)$/) do |score|
